@@ -47,24 +47,6 @@ class AppCanvas(QtOpenGL.QGLWidget):
     def paintGL(self):
         glClear(GL_COLOR_BUFFER_BIT)
 
-        # Draw Patches
-        glShadeModel(GL_SMOOTH)
-        patches = Hetool.getPatches()
-        for patch in patches:
-            if patch.isDeleted:
-                glColor3f(0.0, 0.0, 0.0)
-            elif patch.isSelected():
-                glColor3f(1.0, 0.0, 0.0)
-            else:
-                glColor3f(0.0, 0.0, 0.5)
-
-            triangs = Hetool.tessellate(patch)
-            for triangle in triangs:
-                glBegin(GL_TRIANGLES)
-                for pt in triangle:
-                    glVertex2d(pt.getX(), pt.getY())
-                glEnd()
-
         # Draw Segments
         segments = Hetool.getSegments()
         for segment in segments:
@@ -76,18 +58,6 @@ class AppCanvas(QtOpenGL.QGLWidget):
             glBegin(GL_LINE_STRIP)
             for pt in pts:
                 glVertex2f(pt.getX(), pt.getY())
-            glEnd()
-
-        # Draw Points
-        points = Hetool.getPoints()
-        for point in points:
-            if point.isSelected():
-                glColor3f(1.0, 0.0, 0.0)
-            else:
-                glColor3f(0.0, 0.0, 1.0)
-            glPointSize(3)
-            glBegin(GL_POINTS)
-            glVertex2f(point.getX(), point.getY())
             glEnd()
 
         # Draw curves that are being collected
