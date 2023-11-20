@@ -95,8 +95,8 @@ class Hetool:
     #           - _shiftkey: Boolean that determines if the shift key is pressed
     #                        (True or False). Determines if more than one entity
     #                        can be selected.
-    def selectPick(_x,  _y,  _tol,  _shiftkey=False):
-        Hetool.__hecontroller.selectPick(_x,  _y,  _tol,  _shiftkey)
+    def selectPick(_x, _y, _tol, _shiftkey=False):
+        Hetool.__hecontroller.selectPick(_x, _y, _tol, _shiftkey)
 
     # This function selects all entities within a rectangular region.
     # To select several entities in sequence just use the shift key.
@@ -106,8 +106,7 @@ class Hetool:
     #           - _shiftkey: Boolean that determines if the shift key is pressed
     #                        (True or False).
     def selectFence(_xmin, _xmax, _ymin, _ymax, _shiftkey=False):
-        Hetool.__hecontroller.selectFence(
-            _xmin, _xmax, _ymin, _ymax, _shiftkey)
+        Hetool.__hecontroller.selectFence(_xmin, _xmax, _ymin, _ymax, _shiftkey)
 
     # This function unselects all geometric elements of the data structure.
     def unSelectAll():
@@ -255,7 +254,9 @@ class Hetool:
     # shapes that can be drawn. To view the pattern of this dictionary see the getSymbol
     # function in the directory src\hetool\geometry\attributes\attribsymbols.
     def getAttributeSymbol(_attribute, _scale=1.0, _pt=None, _seg=None, _patch=None):
-        return Hetool.__hecontroller.getAttributeSymbol(_attribute, _scale, _pt, _seg, _patch)
+        return Hetool.__hecontroller.getAttributeSymbol(
+            _attribute, _scale, _pt, _seg, _patch
+        )
 
     # This function sets the number of subdivisions of a one or more selected segments.
     # Input data:

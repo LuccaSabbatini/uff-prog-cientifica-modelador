@@ -10,7 +10,7 @@ def main():
     """
     Main function of the program.
     """
-    with open(file="input.json", mode="r", encoding="utf-8") as file:
+    with open(file="plots/inputs/leapfrog.json", mode="r", encoding="utf-8") as file:
         model = json.load(file)
 
     spring_constant = model["spring_constant"]

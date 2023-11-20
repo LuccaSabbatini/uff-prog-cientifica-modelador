@@ -16,7 +16,7 @@ class MyWindow(QMainWindow):
         self.canvas.setModel(self.model)
         # create a Toolbar
         tb = self.addToolBar("File")
-        fit = QAction(QIcon("icons/fit.jpg"), "fit", self)
+        fit = QAction(QIcon("icons/fit.png"), "fit", self)
         tb.addAction(fit)
         tb.actionTriggered[QAction].connect(self.tbpressed)
 
