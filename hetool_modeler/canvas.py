@@ -47,6 +47,24 @@ class AppCanvas(QtOpenGL.QGLWidget):
     def paintGL(self):
         glClear(GL_COLOR_BUFFER_BIT)
 
+        # Draw Patches
+        glShadeModel(GL_SMOOTH)
+        patches = Hetool.getPatches()
+        for patch in patches:
+            if patch.isDeleted:
+                glColor3f(0.0, 0.0, 0.0)
+            elif patch.isSelected():
+                glColor3f(1.00, 0.75, 0.75)
+            else:
+                glColor3f(0.75, 0.75, 0.75)
+
+            triangs = Hetool.tessellate(patch)
+            for triangle in triangs:
+                glBegin(GL_TRIANGLES)
+                for pt in triangle:
+                    glVertex2d(pt.getX(), pt.getY())
+                glEnd()
+
         # Draw Segments
         segments = Hetool.getSegments()
         for segment in segments:
@@ -58,6 +76,18 @@ class AppCanvas(QtOpenGL.QGLWidget):
             glBegin(GL_LINE_STRIP)
             for pt in pts:
                 glVertex2f(pt.getX(), pt.getY())
+            glEnd()
+
+        # Draw Points
+        points = Hetool.getPoints()
+        for point in points:
+            if point.isSelected():
+                glColor3f(1.0, 0.0, 0.0)
+            else:
+                glColor3f(0.0, 0.0, 1.0)
+            glPointSize(3)
+            glBegin(GL_POINTS)
+            glVertex2f(point.getX(), point.getY())
             glEnd()
 
         # Draw curves that are being collected
@@ -113,6 +143,10 @@ class AppCanvas(QtOpenGL.QGLWidget):
             self.m_collector.activateCollector(_varg)
         elif _state == "Select":
             self.m_state = "Select"
+        elif _state == "CreateMesh":
+            self.m_state = "CreateMesh"
+            patch = Hetool.getSelectedPatches()[0]
+            self.m_collector.createMesh(patch, _varg)
         else:
             self.m_state = "View"
 
