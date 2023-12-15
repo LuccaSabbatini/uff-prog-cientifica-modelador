@@ -306,6 +306,9 @@ class AppCanvas(QtOpenGL.QGLWidget):
                 "boundary_values": boundary_values,
             }
 
-            # Export the mesh
-            with open(f"export/export_{time.strftime()}.json", "w") as outfile:
+            with open(
+                f"export/export_{int(time.time()*1000)}.json",
+                "w",
+                encoding="utf-8",
+            ) as outfile:
                 json.dump(mesh_export, outfile)
